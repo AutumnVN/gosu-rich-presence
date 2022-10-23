@@ -121,7 +121,7 @@ module.exports = () => {
       state = 'Just listening';
     }
     const presence = {
-      largeImageKey: this.config.largeImageKey,
+      largeImageKey: `https://assets.ppy.sh/beatmaps/${data.menu.bm.set}/covers/list@2x.jpg`,
       largeImageText: largeImageText,
       smallImageKey: smallImageKey,
       smallImageText: smallImageText,
@@ -169,7 +169,6 @@ module.exports = () => {
       console.log('command not found!', args[0])
   })
   process.on('uncaughtException', (e) => {
-    fs.writeFileSync('error.txt', `${e.stack}`)
     console.log(e)
     process.emit('beforeExit')
   })
