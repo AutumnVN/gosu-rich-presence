@@ -125,7 +125,7 @@ module.exports = () => {
       largeImageText: largeImageText,
       smallImageKey: smallImageKey,
       smallImageText: smallImageText,
-      details: `${data.menu.bm.metadata.title.slice(0, 29 - data.menu.bm.metadata.mapper.length - 3)} | ${data.menu.bm.metadata.mapper}`,
+      details: `${data.menu.bm.metadata.title} | ${data.menu.bm.metadata.mapper}`,
       state: `${state}`,
       buttons: [{
           label: 'Beatmap',
