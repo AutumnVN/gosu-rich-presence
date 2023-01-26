@@ -2,10 +2,10 @@ let getLetterGrade = (data) => {
   let hasHidden = data.menu.mods.str.match(/HD/g);
   let letter = data.gameplay.hits.grade.current;
   if (letter === 'SS' && hasHidden)
-    return 'https://autumnvn.me/xh.png'
+    return 'https://autumnvn.github.io/ssh.png'
   if (letter === 'S' && hasHidden)
-    return 'https://autumnvn.me/sh.png'
-  return `https://autumnvn.me/${letter.toLowerCase()}.png`
+    return 'https://autumnvn.github.io/sh.png'
+  return `https://autumnvn.github.io/${letter.toLowerCase()}.png`
 }
 let resolveObjectPath = (obj, path) => {
   let pathArray = path.split('.');
