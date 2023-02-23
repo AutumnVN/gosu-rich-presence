@@ -1,11 +1,12 @@
 let getLetterGrade = (data) => {
   let hasHidden = data.menu.mods.str.match(/HD/g);
+  let hasFlashlight = data.menu.mods.str.match(/FL/g);
   let letter = data.gameplay.hits.grade.current;
-  if (letter === 'SS' && hasHidden)
-    return 'https://autumnvn.github.io/ssh.png'
-  if (letter === 'S' && hasHidden)
-    return 'https://autumnvn.github.io/sh.png'
-  return `https://autumnvn.github.io/${letter.toLowerCase()}.png`
+  if (letter === 'SS' && (hasHidden || hasFlashlight))
+    return 'https://chino.is-a.dev/grade/ssh.png'
+  if (letter === 'S' && (hasHidden || hasFlashlight))
+    return 'https://chino.is-a.dev/grade/sh.png'
+  return `https://chino.is-a.dev/grade/${letter.toLowerCase()}.png`
 }
 let resolveObjectPath = (obj, path) => {
   let pathArray = path.split('.');
