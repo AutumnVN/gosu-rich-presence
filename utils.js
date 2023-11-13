@@ -1,11 +1,13 @@
+const GRADE_URL = 'https://raw.githubusercontent.com/AutumnVN/gosu-rich-presence/main/grade/';
 let getLetterGrade = (data) => {
   let hasHidden = data.menu.mods.str.match(/HD/g);
+  let hasFlashlight = data.menu.mods.str.match(/FL/g);
   let letter = data.gameplay.hits.grade.current;
-  if (letter === 'SS' && hasHidden)
-    return 'xh'
-  if (letter === 'S' && hasHidden)
-    return 'sh'
-  return letter.toLowerCase()
+  if (letter === 'SS' && (hasHidden || hasFlashlight))
+    return GRADE_URL + 'ssh.png'
+  if (letter === 'S' && (hasHidden || hasFlashlight))
+    return GRADE_URL + 'sh.png'
+  return GRADE_URL + letter.toLowerCase() + '.png'
 }
 let resolveObjectPath = (obj, path) => {
   let pathArray = path.split('.');

@@ -4,3 +4,4 @@ config.ini
 error.txt
 rpc-config.ini
 gosu-rich-presence.exe
+package-lock.json

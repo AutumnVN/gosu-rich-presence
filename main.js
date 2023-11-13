@@ -8,7 +8,7 @@ module.exports = () => {
   const osu = new WebSocket(`ws://localhost:${this.config.port}/ws`);
   osu.once('error', (e) => {
     if (e.message.startsWith('connect ECONNREFUSED'))
-      throw new Error('Make sure gosu-memory is running!');
+      console.log('Make sure gosu-memory is running!');
   })
   this.cache = {};
   const DiscordRichPresence = require('discord-rpc');
@@ -49,7 +49,7 @@ module.exports = () => {
         result = result.replace(`\${${x}}`, value)
       }
     } catch (err) {
-      throw new Error(err)
+      console.log(err)
     }
     return result
   }
@@ -125,7 +125,7 @@ module.exports = () => {
       largeImageText: largeImageText,
       smallImageKey: smallImageKey,
       smallImageText: smallImageText,
-      details: `${data.menu.bm.metadata.title} | Mapped by ${data.menu.bm.metadata.mapper}`,
+      details: `${data.menu.bm.metadata.title} | ${data.menu.bm.metadata.mapper}`,
       state: `${state}`,
       buttons: [{
           label: 'Beatmap',
@@ -148,7 +148,12 @@ module.exports = () => {
     if (!presence.endTimestamp)
       delete presence.endTimestamp;
     this.cache = data
-    client.setActivity(presence)
+    console.log(presence ? `[Presence Object] ${presence.details}` : 'No presence')
+    client.setActivity(presence).then(() => {
+      console.log(`[osu!] ${presence.details}`)
+    }).catch(err => {
+      console.log(err)
+    })
   })
   this.commands = new Map()
   //set commands manually because pkg does not allow dynamic imports
@@ -175,10 +180,9 @@ module.exports = () => {
   process.on('beforeExit', () => {
     console.log('exiting')
     client.clearActivity(PID).catch((err) => {})
-    process.exit()
+    //process.exit()
   })
   client.login({
-    clientId: this.config.client_id,
-    redirectUri: 'https://github.com/cxtch/gosu-rich-presence',
+    clientId: this.config.client_id
   })
 }
